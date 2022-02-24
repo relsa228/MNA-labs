@@ -1,11 +1,14 @@
-def make_identity(matrix):
-    for nrow in range(len(matrix) - 1, 0, -1):
-        row = matrix[nrow]
-        for upper_row in matrix[:nrow]:
-            factor = upper_row[nrow]
-            upper_row -= factor * row
-    return matrix
+import numpy as np
+
+from Gauss import gaussFunc
+from MainElem import gaussPivotFunc
+
+matrix = np.array([[3.8, 6.7, -1.2, 5.2],
+                   [6.4, 1.3, -2.7, 3.8],
+                   [2.4, -4.5, 3.5, -0.6]])
 
 
 if __name__ == '__main__':
-    print("Kill me, please!!!")
+    result = gaussPivotFunc(matrix)
+
+    print(result)
