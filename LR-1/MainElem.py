@@ -10,7 +10,7 @@ def make_identity(matrixT):
     return matrixT
 
 
-def gaussPivotFunc(matrix):
+def gauss_pivot_func(matrix):
     for nrow in range(len(matrix)):
         pivot = nrow + np.argmax(abs(matrix[nrow:, nrow]))
         if pivot != nrow:
