@@ -1,6 +1,3 @@
-import numpy as np
-
-
 def gauss_func(matrix_a, b):
     for i in range(1, matrix_a.shape[0]):
         for j in range(i, matrix_a.shape[0]):
