@@ -1,13 +1,13 @@
 import numpy as np
 
 
-def make_identity(matrixT):
-    for nrow in range(len(matrixT) - 1, 0, -1):
-        row = matrixT[nrow]
-        for upper_row in matrixT[:nrow]:
+def make_identity(matrix_t):
+    for nrow in range(len(matrix_t) - 1, 0, -1):
+        row = matrix_t[nrow]
+        for upper_row in matrix_t[:nrow]:
             factor = upper_row[nrow]
             upper_row -= factor * row
-    return matrixT
+    return matrix_t
 
 
 def gauss_pivot_func(matrix):

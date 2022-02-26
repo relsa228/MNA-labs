@@ -12,9 +12,7 @@ def gauss_func(matrix_a, b):
             else:
                 print("Схема не может быть реализована, так как один из главных элементов равен нулю")
                 return None
-
     x = [0 for i in range(matrix_a.shape[0])]
     for i in range(matrix_a.shape[0] - 1, -1, -1):
-        if matrix_a[i][i] != 0:
-            x[i] = (b[i] - sum([matrix_a[i][j] * x[j] for j in range(i + 1, matrix_a.shape[0])])) / matrix_a[i][i]
+        x[i] = (b[i] - sum([matrix_a[i][j] * x[j] for j in range(i + 1, matrix_a.shape[0])])) / matrix_a[i][i]
     return x, matrix_a, b
