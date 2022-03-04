@@ -1,6 +1,7 @@
 import numpy as np
 
 from Seidel import saidel_method
+from Simple_iteration_method import prime_iteration
 
 
 def val():
@@ -36,4 +37,9 @@ if __name__ == '__main__':
     print("\n======================================")
     print("Метод Зейделя:\n--------------")
     result = saidel_method(val()[0], val()[1])
+    output(result)
+
+    print("\n======================================")
+    print("Метод простых итераций:\n--------------")
+    result = prime_iteration(val()[0], val()[1])
     output(result)
