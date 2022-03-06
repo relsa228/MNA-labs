@@ -1,6 +1,6 @@
 import numpy as np
 
-from Seidel import saidel_method
+from Seidel import seidel_method
 from Simple_iteration_method import prime_iteration
 
 
@@ -17,7 +17,7 @@ def val():
                   [0, 0, 0.01, 0.01, 0],
                   [0, 0, 0, 0.01, 0.01]])
 
-    b = np.array([1.2, 2.2, 4.0, 0.0, -1.2])
+    b = np.array([1.2, 2.2, 4, 0, -1.2])
     a = 4 * c + d
     return a, b
 
@@ -36,10 +36,12 @@ def output(result_full):
 if __name__ == '__main__':
     print("\n======================================")
     print("Метод Зейделя:\n--------------")
-    result = saidel_method(val()[0], val()[1])
-    output(result)
+    result = seidel_method(val()[0], val()[1], 0.0001)
+    if result is not None:
+        output(result)
 
     print("\n======================================")
     print("Метод простых итераций:\n--------------")
-    result = prime_iteration(val()[0], val()[1])
-    output(result)
+    result = prime_iteration(val()[0], val()[1], 0.0001)
+    if result is not None:
+        output(result)
