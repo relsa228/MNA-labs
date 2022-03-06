@@ -27,7 +27,7 @@ def output(result_full):
     result_x = result_full[0]
     result_iteration = result_full[1]
     print("Результат:")
-    for i in range(val()[0].shape[0]):
+    for i in range(val()[0].shape[1]):
         print(f"x_{i + 1} = " "%.4f" % result_x[i])
     print(f"\nКол-во итераций: {result_iteration}")
     print("======================================")

@@ -4,14 +4,6 @@ import numpy as np
 def seidel_criteria(matrix) -> bool:
     on_proc_matrix = matrix.copy()
 
-    diag = np.diagonal(on_proc_matrix)
-    for i in range(0, on_proc_matrix.shape[0]):
-        for j in range(0, on_proc_matrix.shape[0]):
-            if i != j:
-                on_proc_matrix[i][j] = on_proc_matrix[i][j] / diag[i]
-    for i in range(0, on_proc_matrix.shape[1]):
-        on_proc_matrix[i][i] = 0
-
     f = np.zeros(on_proc_matrix.shape)
     for i in range(0, on_proc_matrix.shape[0]):
         for j in range(i, on_proc_matrix.shape[0]):
@@ -33,8 +25,11 @@ def seidel_method(a, b, eps):
     n = len(a)
     x = np.zeros(n)
     iterations = 0
+    for i in range(a.shape[0]):
+        b[i] /= a[i][i]
+        a[i] /= a[i][i]
 
-    if not seidel_criteria(a):
+    if not seidel_criteria(np.eye(a.shape[0]) - a):
         print("Нарушен необходимый критерий")
         return None
 
