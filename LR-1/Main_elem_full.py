@@ -26,6 +26,11 @@ def gauss_main_full_func(matrix_a, b):
         for j in range(matrix_a.shape[0]):
             matrix_a[i][j] = int(matrix_a[i][j] * 10000) / 10000
 
+    for i in range(matrix_a.shape[0]):
+        if matrix_a[i][i] == 0:
+            print("На главной диагонали были обнаружены нули. Решение остановлено.")
+            return None
+
     # ищем решения
     x = [b[b.shape[0] - 1] / (matrix_a[matrix_a.shape[0] - 1][matrix_a.shape[0] - 1])]
     for i in range(matrix_a.shape[0] - 2, -1, -1):
