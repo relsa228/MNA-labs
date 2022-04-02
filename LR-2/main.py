@@ -34,6 +34,7 @@ def output(result_full):
 
 
 if __name__ == '__main__':
+    print(val()[0])
     print("\n======================================")
     print("Метод Зейделя:\n--------------")
     result = seidel_method(val()[0], val()[1], 0.0001)
