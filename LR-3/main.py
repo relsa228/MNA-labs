@@ -4,13 +4,12 @@ import Half_div_module as hm
 import Newton_module as nm
 import Shturm_module as sm
 
-
-poly = [1, -5.5796, -193.022, -633.105]
+poly = [1, -6.0951, -35.3942, 25.7283]
 eps = 0.0001
 
 
 def f(x):
-    return x ** 3 - 5.5796 * x ** 2 - 193.022 * x - 633.105
+    return x ** 3 - 6.0951 * x ** 2 - 35.3942 * x + 25.7283
 
 
 def output(result_full):

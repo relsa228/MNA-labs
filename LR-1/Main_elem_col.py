@@ -22,6 +22,11 @@ def gauss_main_col_func(matrix_a, b):
         matrix_a = trng_res[0]
         b = trng_res[1]
 
+    for i in range(matrix_a.shape[0]):
+        if matrix_a[i][i] == 0:
+            print("На главной диагонали были обнаружены нули. Решение остановлено.")
+            return None
+
     # ищем решения
     x = [0 for _ in range(matrix_a.shape[0])]
     for i in range(matrix_a.shape[0] - 1, -1, -1):
