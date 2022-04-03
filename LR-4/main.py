@@ -1,4 +1,5 @@
 import numpy as np
+import sympy as sp
 import time
 
 from Iteration_module import simple_iterations
@@ -26,7 +27,19 @@ def f(x):
     return f
 
 
+def build_plots():
+    (x, y) = sp.symbols('x y')
+    f1 = sp.tan(x * y + 0.2) - x
+    f2 = 0.8 * x ** 2 + 2 * y ** 2 - 1
+
+    plots = sp.plot_implicit(sp.Eq(f1, 0), (x, 0, 1.5), (y, 0, 1.5), line_color="blue", show=False)
+    plots.extend(sp.plot_implicit(sp.Eq(f2, 0), (x, 0, 1.5), (y, 0, 1.5), line_color="red", show=False))
+    plots.show()
+
+
 if __name__ == '__main__':
+    build_plots()
+
     approximation = [0.65, 0.55]
 
     print("1. Метод простых итераций: ")
