@@ -1,43 +1,27 @@
-import numpy
+import numpy as np
 
 
-def get_x(x, y):
-    return numpy.tan(x * y + 0.1) - x
+def jacobian(f, x, approximation):
+    range_of_function = len(x)
+    jac = np.zeros([range_of_function, range_of_function])
+    f0 = f(x)
+    for i in np.arange(0, range_of_function, 1):
+        tt = x[i]
+        x[i] = tt + approximation
+        f1 = f(x)
+        x[i] = tt
+        jac[:, i] = (f1 - f0) / approximation
+    return jac, f0
 
 
-def get_y(x, y):
-    return 0.8 * x ** 2 + 2 * y ** 2 - 1
+def newton_method(f, x, eps, approximation):
+    iterMax = 1000
+    for iterations in range(iterMax):
+        jac, fO = jacobian(f, x, approximation)
 
+        if np.sqrt(np.dot(fO, fO) / len(x)) < eps:
+            return x, iterations
 
-def diff_matrix(x, y):
-    return numpy.array([
-        [y / (numpy.cos(x * y + 0.1)) ** 2 - 1, x / (numpy.cos(x * y + 0.1)) ** 2],
-        [2 * 0.8 * x, 4 * y]
-    ])
-
-
-def newton_method(first_approximation, eps):
-    matrix_result = numpy.asarray([0.0, 0.0])
-    temp, iterations = 1, 0
-    while temp > eps:
-        matrix_empty = diff_matrix(*first_approximation)
-        matrix_x = [[get_x(*first_approximation), matrix_empty[0][1]],
-                    [get_y(*first_approximation), matrix_empty[1][1]]]
-        matrix_y = [[matrix_empty[0][0], get_x(*first_approximation)],
-                    [matrix_empty[0][1], get_y(*first_approximation)]]
-        det_matrix_empty = numpy.linalg.det(matrix_empty)
-        det_matrix_x = numpy.linalg.det(matrix_x)
-        det_matrix_y = numpy.linalg.det(matrix_y)
-        matrix_result[0] = first_approximation[0] - det_matrix_x / det_matrix_empty
-        matrix_result[1] = first_approximation[1] - det_matrix_y / det_matrix_empty
-        temp = numpy.max(numpy.abs(first_approximation - matrix_result))
-        first_approximation = matrix_result
-        iterations += 1
-    return first_approximation, iterations
-
-
-def print_result(first_approximation, eps):
-    result_to_print, iterations_counter = newton_method(first_approximation, eps)
-    x_variable = int(result_to_print[0] * 10000) / 10000
-    y_variable = int(result_to_print[1] * 10000) / 10000
-    print(f"x = {x_variable}\ny = {y_variable}\nIterations: {iterations_counter}")
+        dx = np.linalg.solve(jac, fO)
+        x = x - dx
+    return -1, -1
