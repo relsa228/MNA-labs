@@ -40,7 +40,7 @@ def build_plots():
 if __name__ == '__main__':
     build_plots()
 
-    approximation = [0.65, 0.55]
+    approximation = [0.64, 0.59]
 
     print("1. Метод простых итераций: ")
     work_time_start_simple = time.perf_counter()
@@ -51,6 +51,6 @@ if __name__ == '__main__':
     print("\n2. Метод Ньютона: ")
     x0 = np.zeros([n])
     work_time_start_newton = time.perf_counter()
-    x_newton, iteration_newton = newton_method(f, x0, eps, 0.55)
+    x_newton, iteration_newton = newton_method(f, x0, eps, 0.59)
     work_time_final_newton = time.perf_counter() - work_time_start_newton
     output(x_newton, iteration_newton, work_time_final_newton)
