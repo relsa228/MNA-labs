@@ -1,4 +1,5 @@
 import numpy as np
+import time
 from jacobi_algorithm_module import jacobi_method
 from power_iteration import power_iteration_method
 from qr_method import qr_method
@@ -33,19 +34,28 @@ if __name__ == '__main__':
     print("====================================================================")
 
     print("\n1. Метод Якоби:")
+    t = time.perf_counter()
     result_jacobi = jacobi_method(matrix(), eps)
+    t_w = time.perf_counter() - t
     print("Собственные значения:")
     for i in range(1, matrix().shape[0] + 1):
         print(f"{i}. " "%.4f" % result_jacobi[0][i - 1])
     print(f"\nСобственные векторы: \n{result_jacobi[1]}")
+    print(f"\nВремя выполнения: {t_w}")
 
     print("\n\n2. Степенной метод:")
+    t = time.perf_counter()
     result_pow = power_iteration_method(matrix(), eps)
+    t_w = time.perf_counter() - t
     print(f"Наибольшее собственное значение: \n" "%.4f" % result_pow[0])
     print(f"\nНаибольший собственный вектор: \n {result_pow[1]}")
+    print(f"\nВремя выполнения: {t_w}")
 
     print("\n\n3. QR метод:")
+    t = time.perf_counter()
     result_qr = qr_method(matrix(), eps)
+    t_w = time.perf_counter() - t
     print("Собственные значения:")
     for i in range(1, matrix().shape[0] + 1):
         print(f"{i}. " "%.4f" % result_qr[i - 1])
+    print(f"\nВремя выполнения: {t_w}")
