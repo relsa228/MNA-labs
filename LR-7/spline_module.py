@@ -3,13 +3,6 @@ import math
 
 
 class Spline:
-    u"""
-    Cubic Spline class
-    usage:
-        spline=Spline(x,y)
-        rx=np.arange(0,4,0.1)
-        ry=[spline.calc(i) for i in rx]
-    """
 
     def __init__(self, x, y):
         self.b, self.c, self.d, self.w = [], [], [], []
@@ -17,30 +10,21 @@ class Spline:
         self.x = x
         self.y = y
 
-        self.nx = len(x)  # dimension of x
+        self.nx = len(x)
         h = np.diff(x)
 
-        # calc coefficient c
         self.a = [iy for iy in y]
 
-        # calc coefficient c
         A = self.__calc__A(h)
         B = self.__calc__B(h)
         self.c = np.linalg.solve(A, B)
-        #  print(self.c1)
 
-        # calc spline coefficient b and d
         for i in range(self.nx - 1):
             self.d.append((self.c[i + 1] - self.c[i]) / (3.0 * h[i]))
             tb = (self.a[i + 1] - self.a[i]) / h[i] - h[i] * (self.c[i + 1] + 2.0 * self.c[i]) / 3.0
             self.b.append(tb)
 
     def calc(self, t):
-        u"""
-        Calc position
-        if t is outside of the input x, return None
-        """
-
         if t < self.x[0]:
             return None
         elif t > self.x[-1]:
@@ -53,18 +37,11 @@ class Spline:
         return result
 
     def __search_index(self, x):
-        u"""
-        search data segment index
-        """
-
         for i in range(self.nx):
             if self.x[i] - x > 0:
                 return i - 1
 
     def __calc__A(self, h):
-        u"""
-        calc matrix A for spline coefficient c
-        """
         A = np.zeros((self.nx, self.nx))
         A[0, 0] = 1.0
         for i in range(self.nx - 1):
@@ -80,9 +57,6 @@ class Spline:
         return A
 
     def __calc__B(self, h):
-        u"""
-        calc matrix B for spline coefficient c
-        """
         B = np.zeros(self.nx)
         for i in range(self.nx - 2):
             B[i + 1] = 3.0 * (self.a[i + 2] - self.a[i + 1]) / h[i + 1] - 3.0 * (self.a[i + 1] - self.a[i]) / h[i]
@@ -90,9 +64,6 @@ class Spline:
         return B
 
     def __calc__D(self, t):
-        u"""
-        Calc first derivative
-        """
 
         j = int(math.floor(t))
         if j < 0:
@@ -105,9 +76,6 @@ class Spline:
         return result
 
     def calcdd(self, t):
-        u"""
-        Calc second derivative
-        """
         j = int(math.floor(t))
         if j < 0:
             j = 0
