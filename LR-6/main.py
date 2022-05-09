@@ -5,9 +5,10 @@ import numpy as np
 
 from lagrange_module import LagrangePoly
 from newton_module import NewtonPoly
+from least_squares_module import least_squares
 
-k = 4
-m = 2
+k = 3
+m = 1.5
 X = np.linspace(0, 1, 11)
 p = [0, 0.41, 0.79, 1.13, 1.46, 1.76, 2.04, 2.3, 2.55, 2.79, 3.01]
 Y = [p_i + (-1) ** k * m for p_i in p]
@@ -25,15 +26,7 @@ t = time.perf_counter()
 res = nw.interpolate(0.47)
 t_w = time.perf_counter() - t
 
-print(f"Интерполяция в точке 0.47: {'%.5f' % res}")
-print(f"Время выполнения: {'%.5f' % t_w}")
-
-for i in range(0, 10):
-    print(lp.basis(0.47, i))
-# plt.plot(xx, )
-# plt.plot(xx, lp.basis(xx, 1))
-# plt.plot(xx, lp.basis(xx, 2))
-# plt.plot(xx, lp.basis(xx, 3))
-# plt.plot(X, nw.interpolate(X), linestyle=':')
-# plt.plot(xx, np.tan(xx), linestyle=':')
-# plt.show()
+w = least_squares(X, Y)[1]
+b = least_squares(X, Y)[0]
+y_val = b - w*0.47
+print(f"Лучшее приближение в точке 0.47: {'%.5f' % y_val}")

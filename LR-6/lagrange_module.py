@@ -14,4 +14,4 @@ class LagrangePoly:
 
     def interpolate(self, x_point):  # сама интерполяция, сложение
         l = [self.basis(x_point, j) for j in range(self.n)]
-        return np.sum(l, axis=0)
+        return np.sum(l, axis=0), l
