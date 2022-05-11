@@ -26,7 +26,8 @@ t = time.perf_counter()
 res = nw.interpolate(0.47)
 t_w = time.perf_counter() - t
 
-w = least_squares(X, Y)[1]
-b = least_squares(X, Y)[0]
-y_val = b - w*0.47
+resu = lp.interpolate(X)
+w = least_squares(X, resu)[0]
+b = least_squares(X, resu)[1]
+y_val = b + w*0.47
 print(f"Лучшее приближение в точке 0.47: {'%.5f' % y_val}")
