@@ -22,12 +22,4 @@ xx = [-1.5, -1.25, -1, -0.75, -0.5, -0.25, 0, 0.25, 0.5, 0.75, 1, 1.25, 1.5]
 lp = LagrangePoly(X, Y)
 nw = NewtonPoly(X, Y)
 
-t = time.perf_counter()
-res = nw.interpolate(0.47)
-t_w = time.perf_counter() - t
-
-resu = lp.interpolate(X)
-w = least_squares(X, resu)[0]
-b = least_squares(X, resu)[1]
-y_val = b + w*0.47
-print(f"Лучшее приближение в точке 0.47: {'%.5f' % y_val}")
+nw.print_poly()
