@@ -28,3 +28,17 @@ class NewtonPoly:
             newton_res += self.get_a(j, 0) * self.get_n(j, x_point)
 
         return newton_res
+
+    def print_poly(self):
+        result_str = f"f({'%.1f' % self.X[0]}) +\n"
+        for i in range(1, len(self.X) + 1):
+            funct = "f("
+            for j in range(0, i):
+                result_str += f"(x - {'%.1f' % self.X[j]}) * "
+                funct += f"{'%.1f' % self.X[j]}; "
+            result_str += "\n"
+            result_str += funct[:-2]
+            result_str += ") + "
+            result_str += "\n"
+
+        print(result_str[:-3])

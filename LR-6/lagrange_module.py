@@ -15,3 +15,12 @@ class LagrangePoly:
     def interpolate(self, x_point):  # сама интерполяция, сложение
         l = [self.basis(x_point, j) for j in range(self.n)]
         return np.sum(l, axis=0)
+
+    def print_poly(self):
+        result_str = ""
+        for i in range(1, len(self.X)):
+            result_str += f"[(x - {'%.1f' % self.X[i]})/({self.X[0]} - {'%.1f' % self.X[i]})] * "
+            if i%2 == 0:
+                result_str += "\n"
+        result_str = result_str[:-3]
+        print(result_str)
