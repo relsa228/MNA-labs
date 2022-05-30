@@ -1,13 +1,16 @@
-def runge_kutta_method(function, n, h, x, y):
-    yn = 0
-    for i in range(n):
-        k1 = h * (function(x, y))
-        k2 = h * (function((x + h / 2), (y + k1 / 2)))
-        k3 = h * (function((x + h / 2), (y + k2 / 2)))
-        k4 = h * (function((x + h), (y + k3)))
-        k = (k1 + 2 * k2 + 2 * k3 + k4) / 6
-        yn = y + k
-        y = yn
-        x = x + h
+import numpy as np
 
-    return x, yn
+
+def runge_kutta_method(function, t0, tn, n, y0):
+    h = abs(tn - t0) / n
+    t = np.linspace(t0, tn, n + 1)
+    y = np.zeros(n + 1)
+    y[0] = y0
+    for i in range(0, n):
+        K1 = function(t[i], y[i])
+        K2 = function(t[i] + h / 2, y[i] + K1 * h / 2)
+        K3 = function(t[i] + h / 2, y[i] + K2 * h / 2)
+        K4 = function(t[i] + h, y[i] + K3 * h)
+        y[i + 1] = y[i] + h * (K1 + 2 * K2 + 2 * K3 + K4) / 6
+
+    return tn, y

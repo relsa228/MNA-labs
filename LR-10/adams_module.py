@@ -7,7 +7,7 @@ def adams_bash(funct, n, t0, tn, y0):
     h = abs(tn - t0) / n
     t = np.linspace(t0, tn, n + 1)
     y = np.zeros(n + 1)
-    y[0:3] = runge_kutta_method(funct, 2, t0, t0 + 2 * h, y0)[1]
+    y[0:3] = runge_kutta_method(funct, t0, t0 + 2 * h, 2, y0)[1]
     K1 = funct(t[1], y[1])
     K2 = funct(t[0], y[0])
     for i in range(2, n):

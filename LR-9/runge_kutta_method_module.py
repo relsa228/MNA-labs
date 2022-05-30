@@ -1,5 +1,6 @@
 def runge_kutta_method(function, n, h, x, y):
     yn = 0
+    res_yn = [0]
     for i in range(n):
         k1 = h * (function(x, y))
         k2 = h * (function((x + h / 2), (y + k1 / 2)))
@@ -9,5 +10,6 @@ def runge_kutta_method(function, n, h, x, y):
         yn = y + k
         y = yn
         x = x + h
+        res_yn.append(yn)
 
-    return x, yn
+    return x, res_yn
